@@ -12,7 +12,7 @@ public class Main {
   }
 
   public static void runTest(IMovieTicketServer server) {
-    ColorPrint.info("%n===== Running Test: %s =====%n", server.getClass().getSimpleName());
+    ColorPrint.header("%n===== Running Test: %s =====%n", server.getClass().getSimpleName());
 
     Thread t1 = new MovieTicketClient(server, "Xiangming", 3);
     Thread t2 = new MovieTicketClient(server, "Ilaria", 2);
