@@ -1,5 +1,7 @@
 package edu.ntnu.iir.movieticketapp.booking;
 
+import edu.ntnu.iir.movieticketapp.util.ColorPrint;
+
 public class MovieTicketServerSyncOnly implements IMovieTicketServer {
   private final String movieName;
   private int availableTickets;
@@ -11,7 +13,7 @@ public class MovieTicketServerSyncOnly implements IMovieTicketServer {
 
   @Override
   public synchronized boolean bookTickets(String customerName, int numberOfTickets) {
-    System.out.printf("%s is trying to book %d tickets. Available: %d%n",
+    ColorPrint.info("%s is trying to book %d tickets. Available: %d%n",
         customerName, numberOfTickets, availableTickets);
 
     if (availableTickets >= numberOfTickets) {
@@ -23,11 +25,11 @@ public class MovieTicketServerSyncOnly implements IMovieTicketServer {
       }
 
       availableTickets -= numberOfTickets;
-      System.out.printf("%s successfully booked %d tickets. Remaining: %d%n",
+      ColorPrint.success("%s successfully booked %d tickets. Remaining: %d%n",
           customerName, numberOfTickets, availableTickets);
       return true;
     } else {
-      System.out.printf("%s failed to book %d tickets. Not enough available.%n",
+      ColorPrint.error("%s failed to book %d tickets. Not enough available.%n",
           customerName, numberOfTickets);
       return false;
     }

@@ -1,23 +1,19 @@
 package edu.ntnu.iir.movieticketapp;
 
 import edu.ntnu.iir.movieticketapp.booking.*;
+import edu.ntnu.iir.movieticketapp.util.ColorPrint;
 
 public class Main {
   public static void main(String[] args) {
-    System.out.println("===== Synchronized Only =====");
     runTest(new MovieTicketServerSyncOnly("Troll", 10));
-
-    System.out.println("\n===== Volatile Only =====");
     runTest(new MovieTicketServerVolatileOnly("Troll", 10));
-
-    System.out.println("\n===== Synchronized + Volatile =====");
     runTest(new MovieTicketServerSyncAndVolatile("Troll", 10));
-
-    System.out.println("\n===== Unsynced and Non-Volatile =====");
     runTest(new MovieTicketServerUnsynced("Troll", 10));
   }
 
   public static void runTest(IMovieTicketServer server) {
+    ColorPrint.info("%n===== Running Test: %s =====%n", server.getClass().getSimpleName());
+
     Thread t1 = new MovieTicketClient(server, "Xiangming", 3);
     Thread t2 = new MovieTicketClient(server, "Ilaria", 2);
     Thread t3 = new MovieTicketClient(server, "Sam", 3);
@@ -31,6 +27,6 @@ public class Main {
       e.printStackTrace();
     }
 
-    System.out.printf("Final available tickets: %d%n", server.getAvailableTickets());
+    ColorPrint.info("Final available tickets: %d%n", server.getAvailableTickets());
   }
 }
