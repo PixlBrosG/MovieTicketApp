@@ -3,8 +3,8 @@ plugins {
     id 'application'
 }
 
-group = 'edu.ntnu.iir'
-version = '1.0-SNAPSHOT'
+group = 'edu.ntnu.iir.movieticketapp'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -21,4 +21,12 @@ test {
 
 application {
     mainClass = 'edu.ntnu.iir.movieticketapp.Main'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': application.mainClass.get()
+        )
+    }
 }

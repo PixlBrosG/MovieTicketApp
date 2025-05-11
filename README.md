@@ -14,19 +14,11 @@ This project uses **Gradle**. You can run the app with:
 ./gradlew run
 ```
 
-> If you don't have a `run` task set up, add this to your `build.gradle`:
-
-```
-application {
-mainClass = 'Main'
-}
-```
-
 Or run it manually:
 
 ```
 ./gradlew build
-java -cp build/classes/java/main Main
+java -jar build/libs/MovieTicketApp-1.0.0.jar
 ```
 
 ---
@@ -35,12 +27,12 @@ java -cp build/classes/java/main Main
 
 The system tests **four different implementations** of the `MovieTicketServer`, each varying in thread-safety features:
 
-| Server Variant                  | `synchronized` | `volatile` | Description                        |
-|--------------------------------|----------------|------------|------------------------------------|
-| `MovieTicketServerSyncOnly`    | ✅             | ❌         | Correctly synchronized booking     |
-| `MovieTicketServerVolatileOnly`| ❌             | ✅         | Visibility without atomicity       |
-| `MovieTicketServerSyncAndVolatile` | ✅         | ✅         | Redundant but still correct        |
-| `MovieTicketServerUnsynced`    | ❌             | ❌         | Fully unsafe and inconsistent      |
+| Server Variant                     | `synchronized` | `volatile` | Description                    |
+|------------------------------------|----------------|------------|--------------------------------|
+| `MovieTicketServerSyncOnly`        | ✅              | ❌          | Correctly synchronized booking |
+| `MovieTicketServerVolatileOnly`    | ❌              | ✅          | Visibility without atomicity   |
+| `MovieTicketServerSyncAndVolatile` | ✅              | ✅          | Redundant but still correct    |
+| `MovieTicketServerUnsynced`        | ❌              | ❌          | Fully unsafe and inconsistent  |
 
 ---
 
